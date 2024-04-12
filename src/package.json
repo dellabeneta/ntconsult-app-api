@@ -1,0 +1,31 @@
+{
+  "name": "ntconsult-app-api",
+  "version": "1.0.0",
+  "description": "API de teste para deploy no Kubernetes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dellabeneta/ntconsult-app-api.git"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "nodejs"
+  ],
+  "author": "Michel T. Dellabeneta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dellabeneta/ntconsult-app-api/issues"
+  },
+  "homepage": "https://github.com/dellabeneta/ntconsult-app-api#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.3.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
