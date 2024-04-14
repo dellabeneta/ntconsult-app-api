@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+require('dotenv').config()
 
 const app = express();
 app.use(express.json());
 
 // DEFINIÇÕES DO BANCO DE DADOS
-mongoose.connect('mongodb://localhost:27017/desenvolvimento');
+mongoose.connect(process.env.TST_DB_URI);
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,
