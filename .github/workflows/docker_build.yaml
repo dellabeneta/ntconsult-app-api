@@ -39,3 +39,8 @@ jobs:
         with:
           version: latest
 
+      - name: Kubectl Apply
+        with:
+          context: ./k8s
+        run: kubectl apply -f namespace.yaml
+
