@@ -31,6 +31,9 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
+      - name: Print Working Directory
+        run: pwd
+
       - name: Deploy
         run: |
           kubectl apply -f ./k8s/namespace.yaml
