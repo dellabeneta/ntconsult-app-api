@@ -2,11 +2,11 @@ FROM node:lts-alpine3.19
 
 WORKDIR /app
 
-COPY package*.json .
+COPY ../../package*.json .
 
 RUN npm install
 
-COPY . .
+COPY ../../src .
 
 EXPOSE 3000
 
