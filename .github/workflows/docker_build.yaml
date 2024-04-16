@@ -31,7 +31,10 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: Kubectl Apply
-        run: kubectl apply -f k8s/namespace.yaml
+        run: | 
+          kubectl apply -f k8s/namespace.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/loadbalancer.yaml
         
 
 
