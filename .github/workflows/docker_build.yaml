@@ -34,6 +34,7 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Kubectl apply
-        run: kubectl apply -f namespace.yaml
+      - name: List files in current directory
+        run: ls -la
+
 
