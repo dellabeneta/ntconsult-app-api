@@ -33,12 +33,7 @@ jobs:
         uses: azure/k8s-set-context@v3
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
-      
-      # - name: Kubectl tool installer
-      #   uses: Azure/setup-kubectl@v4.0.0
-      #   with:
-      #     version: latest
 
-      - name: Kubectl Test
-        run: kubectl get all
+      - name: Kubectl apply
+        run: kubectl apply -f namespace.yaml
 
