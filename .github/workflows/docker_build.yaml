@@ -39,6 +39,6 @@ jobs:
         with:
           version: latest
 
-      - name: Kubectl Apply
-        run: kubectl apply -f namespace.yaml
+      - name: Kubectl Test
+        run: kubectl get all
 
