@@ -37,6 +37,3 @@ jobs:
       - name: Print Working Directory
         run: pwd
 
-      - name: Cat no Kubeconfig para testes
-        run: cat ~/.kube/config
-
