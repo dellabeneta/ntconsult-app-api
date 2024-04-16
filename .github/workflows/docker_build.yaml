@@ -35,6 +35,6 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
       - name: Print Working Directory
-        run: ls -la /home/runner
+        run: ls -la /home/
         
 
