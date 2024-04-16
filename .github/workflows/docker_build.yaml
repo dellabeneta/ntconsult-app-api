@@ -26,8 +26,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Kubernetes
-        uses: Azure/k8s-deploy@v4.9
+      - name: Set Kubeconfig
+        uses: Azure/k8s-set-context@v4.9
         with:
-          manifests: ./k8s/namespace.yaml
-          token: ${{ secrets.KUBECONFIG }}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: Deploy
+        run: |
+          kubectl apply -f k8s/namespace.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/loadbalancer.yaml
