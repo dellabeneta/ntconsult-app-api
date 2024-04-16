@@ -13,7 +13,7 @@ jobs:
         - name: Build and push Docker image
           uses: docker/build-push-action@v5.3.0
           with:
-            context: /src
+            context: ./src
             push: true
             tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
             build-args: |
