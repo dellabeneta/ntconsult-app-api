@@ -1,9 +1,9 @@
-on:
-  push:
-    branches:
-      - main
+#on:
+#  push:
+#    branches:
+ #     - main
 
-jobs:
+#jobs:
   # build:
   #   runs-on: ubuntu-latest
   #   steps:
@@ -25,16 +25,38 @@ jobs:
   #         build-args: |
   #           DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}
             
-  deploy:
-    #needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Kubeconfig
-        uses: azure/k8s-set-context@v1
-        with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
+  # deploy:
+  #   #needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Set Kubeconfig
+  #       uses: azure/k8s-set-context@v1
+  #       with:
+  #         kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Print Working Directory
-        run: ls -la /home/runner
+  #     - name: Print Working Directory
+  #       run: ls -la /home/runner/work/
         
+name: Deploy Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # Substitua pelo nome da sua branch principal, se necessário
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v1
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+    
+    - name: Deploy to Kubernetes
+      run: kubectl apply -f k8s/deployment.yaml
 
