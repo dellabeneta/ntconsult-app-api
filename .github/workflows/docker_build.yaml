@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Kubeconfig
-        uses: Azure/k8s-set-context@v4.9
+        uses: azure/k8s-set-context@v1
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
