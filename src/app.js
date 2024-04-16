@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // DEFINIÇÕES DO BANCO DE DADOS
-mongoose.connect(process.env.TST_DB_URI);
+mongoose.connect(process.env.DB_CONNECTION_STRING);
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,

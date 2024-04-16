@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v4.1.2
+
+        - name: Build and push Docker image
+          uses: docker/build-push-action@v5.3.0
+          with:
+            context: ../../src
+            push: true
+            tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
+            build-args: |
+              DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}       
