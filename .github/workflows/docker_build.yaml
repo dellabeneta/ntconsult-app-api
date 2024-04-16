@@ -13,7 +13,7 @@ jobs:
       - name: Login to Digital Ocean Registry
         run: echo "${{ secrets.DO_TOKEN }}" | docker login registry.digitalocean.com -u ${{ secrets.DO_TOKEN }} --password-stdin
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image to DO Registry
         uses: docker/build-push-action@v5.3.0
         with:
           context: ./src
@@ -21,3 +21,13 @@ jobs:
           tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
           build-args: |
             DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}
+
+
+  deploy:
+    needs: build  
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Kubernetes
+        uses: appleboy/kubectl-action@v0.1.6
+        with:
+          args: apply -f path/to/your/kubernetes/manifests
