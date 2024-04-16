@@ -34,6 +34,8 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
       
-      - name: PWD
-        run: pwd
+      - name: Kubectl tool installer
+        uses: Azure/setup-kubectl@v4.0.0
+        with:
+          version: default
 
