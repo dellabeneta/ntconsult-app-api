@@ -37,7 +37,6 @@ jobs:
       - name: Print Working Directory
         run: pwd
 
-      - name: Deploy
-        uses: Azure/k8s-deploy@v4.9
-        with:
-          manifests: k8s/namespace.yaml
+      - name: Cat no Kubeconfig para testes
+        run: cat ~/.kube/config
+
