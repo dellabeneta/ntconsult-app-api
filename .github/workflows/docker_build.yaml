@@ -25,16 +25,13 @@ jobs:
           build-args: |
             DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}
             
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Set Kubeconfig
         uses: azure/k8s-set-context@v3
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: List files in current directory
-        run: ls -la
+      - name: Kubectl Apply
+        run: kubectl apply -f /k8s/namespace.yaml
+        
 
 
