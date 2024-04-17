@@ -26,6 +26,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
       - name: Set Kubeconfig
         uses: azure/k8s-set-context@v3
         with:
