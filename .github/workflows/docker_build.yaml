@@ -1,4 +1,4 @@
-name: Meu Fluxo de Trabalho
+name: Pipeline API RESTful
 
 on:
   push:
