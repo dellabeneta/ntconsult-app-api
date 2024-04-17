@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // DEFINIÇÕES DO BANCO DE DADOS
-mongoose.connect(process.env.DB_CONNECTION_STRING);
+mongoose.connect("mongodb+srv://doadmin:P293O6FM17x5q0mI@private-mongodb-ntconsult-tst-75e99226.mongo.ondigitalocean.com/admin?replicaSet=mongodb-ntconsult-tst&tls=true&authSource=admin");
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,

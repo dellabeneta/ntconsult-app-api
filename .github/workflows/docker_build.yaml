@@ -22,8 +22,8 @@ jobs:
           context: ./src
           push: true
           tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
-          build-args: |
-            DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}
+          # build-args: |
+          #   DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}
             
       - name: Set Kubeconfig
         uses: azure/k8s-set-context@v3
