@@ -1,3 +1,5 @@
+ARG DB_CONNECTION_STRING
+
 FROM node:lts-alpine3.19
 
 WORKDIR /app
