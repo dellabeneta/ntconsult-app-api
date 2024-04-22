@@ -18,12 +18,11 @@ jobs:
       - name: Build and push Docker image to 'DO' Registry
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
-
         uses: docker/build-push-action@v5.3.0
         with:
           context: ./src
           push: true
-          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v2
+          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
         
 
   deploy:
@@ -40,6 +39,5 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl delete -f k8s/namespace.yaml
-          kubectl delete -f k8s/deployment.yaml
-          kubectl delete -f k8s/loadbalancer.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/loadbalancer.yaml

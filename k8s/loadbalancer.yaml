@@ -2,7 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: api-ssl
-  namespace: ntconsult
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
     service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
