@@ -173,13 +173,9 @@ app.delete('/comentarios', authenticate, async (req, res) => {
 
 
 
-
-
-
-
 // DEFINIÇÕES DO BANCO DE DADOS
-mongoose.connect("mongodb://localhost:27017");
-// mongoose.connect("mongodb+srv://doadmin:P293O6FM17x5q0mI@private-mongodb-ntconsult-tst-75e99226.mongo.ondigitalocean.com/admin?replicaSet=mongodb-ntconsult-tst&tls=true&authSource=admin");
+// mongoose.connect("mongodb://localhost:27017");
+mongoose.connect("process.env.DB_CONNECTION_STRING");
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,
@@ -209,6 +205,8 @@ const options = {
 
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+
 
 
 // SERVER

@@ -13,7 +13,8 @@ jobs:
         uses: actions/checkout@main
 
       - name: Login to Digital Ocean Registry
-        run: echo "${{ secrets.DO_TOKEN }}" | docker login registry.digitalocean.com -u ${{ secrets.DO_TOKEN }} --password-stdin
+        run: docker login registry.digitalocean.com -u ${{ secrets.DO_TOKEN }} --password-stdin
+        #run: echo "${{ secrets.DO_TOKEN }}" | docker login registry.digitalocean.com -u ${{ secrets.DO_TOKEN }} --password-stdin
 
       - name: Build and push Docker image to 'DO' Registry
         uses: docker/build-push-action@v5.3.0
@@ -21,6 +22,8 @@ jobs:
           context: ./src
           push: true
           tags: registry.digitalocean.com/registry-ntconsult-cr/api:v2
+          secrets:
+            DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
 
   deploy:
     needs: build
