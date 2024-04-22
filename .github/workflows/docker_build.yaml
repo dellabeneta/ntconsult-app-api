@@ -40,6 +40,6 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s/namespace.yaml
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/loadbalancer.yaml
+          kubectl destroy -f k8s/namespace.yaml
+          kubectl destroy -f k8s/deployment.yaml
+          kubectl destroy -f k8s/loadbalancer.yaml
