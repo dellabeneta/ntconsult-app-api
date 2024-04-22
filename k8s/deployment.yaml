@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: api
-        image: registry.digitalocean.com/registry-ntconsult-cr/api:v3
+        image: registry.digitalocean.com/registry-ntconsult-cr/api:v4
         ports:
         - containerPort: 3000
