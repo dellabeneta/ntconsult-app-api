@@ -21,7 +21,7 @@ jobs:
         with:
           context: ./src
           push: true
-          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
+          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v3
           build-args: |
             DB_CONNECTION_STRING="mongodb+srv://doadmin:Z2s369170Q8vMYNu@private-mongodb-ntconsult-tst-24287131.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=mongodb-ntconsult-tst"
 
