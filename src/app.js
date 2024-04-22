@@ -1,45 +1,15 @@
 const express = require('express');
+const authenticate = require('./authMiddleWare')
 const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-require('dotenv').config()
 
 const app = express();
 app.use(express.json());
+app.use(authenticate);
 
-// DEFINIÇÕES DO BANCO DE DADOS
-// mongoose.connect(process.env.DB_CONNECTION_STRING);
-mongoose.connect("mongodb+srv://doadmin:P293O6FM17x5q0mI@private-mongodb-ntconsult-tst-75e99226.mongo.ondigitalocean.com/admin?replicaSet=mongodb-ntconsult-tst&tls=true&authSource=admin");
 
-const ArtigoSchema = new mongoose.Schema({
-    titulo: String,
-    conteudo: String,
-});
-
-const ComentarioSchema = new mongoose.Schema({
-    idArtigo: mongoose.Schema.Types.ObjectId,
-    conteudo: String,
-});
-
-const Artigo = mongoose.model('Artigo', ArtigoSchema);
-const Comentario = mongoose.model('Comentario', ComentarioSchema);
-
-// Configuração do Swagger
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API de Artigos e Comentários',
-      version: '1.0.0',
-      description: 'Uma API simples para gerenciar artigos e comentários',
-    },
-  },
-  apis: ['./app.js'],
-};
-
-const specs = swaggerJsdoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 /**
  * @swagger
@@ -62,7 +32,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
  *       201:
  *         description: Artigo criado com sucesso
  */
-app.post('/artigos', [
+app.post('/artigos', authenticate, [
     body('titulo').notEmpty().withMessage('O título é obrigatório'),
     body('conteudo').notEmpty().withMessage('O conteúdo é obrigatório'),
 ], async (req, res) => {
@@ -96,7 +66,7 @@ app.post('/artigos', [
  *       201:
  *         description: Comentário criado com sucesso
  */
-app.post('/comentarios', [
+app.post('/comentarios', authenticate, [
     body('idArtigo').notEmpty().withMessage('O id do artigo é obrigatório'),
     body('conteudo').notEmpty().withMessage('O conteúdo é obrigatório'),
 ], async (req, res) => {
@@ -130,7 +100,7 @@ app.post('/comentarios', [
  *       200:
  *         description: Lista de artigos
  */
-app.get('/artigos', async (req, res) => {
+app.get('/artigos', authenticate, async (req, res) => {
     try {
         const artigos = await Artigo.find();
         res.send(artigos);
@@ -150,7 +120,7 @@ app.get('/artigos', async (req, res) => {
  *       200:
  *         description: Lista de comentários
  */
-app.get('/comentarios', async (req, res) => {
+app.get('/comentarios', authenticate, async (req, res) => {
     try {
         const comentarios = await Comentario.find();
         res.send(comentarios);
@@ -170,7 +140,7 @@ app.get('/comentarios', async (req, res) => {
  *       200:
  *         description: Todos os artigos foram deletados
  */
-app.delete('/artigos', async (req, res) => {
+app.delete('/artigos', authenticate, async (req, res) => {
     try {
         await Artigo.deleteMany({});
         res.send('Todos os artigos foram deletados.');
@@ -190,7 +160,7 @@ app.delete('/artigos', async (req, res) => {
  *       200:
  *         description: Todos os comentários foram deletados
  */
-app.delete('/comentarios', async (req, res) => {
+app.delete('/comentarios', authenticate, async (req, res) => {
     try {
         await Comentario.deleteMany({});
         res.send('Todos os comentários foram deletados.');
@@ -199,6 +169,47 @@ app.delete('/comentarios', async (req, res) => {
         res.status(500).send('Houve um erro ao tentar deletar todos os comentários: ' + erro);
     }
 });
+
+
+
+
+
+
+
+
+// DEFINIÇÕES DO BANCO DE DADOS
+mongoose.connect("mongodb://localhost:27017");
+// mongoose.connect("mongodb+srv://doadmin:P293O6FM17x5q0mI@private-mongodb-ntconsult-tst-75e99226.mongo.ondigitalocean.com/admin?replicaSet=mongodb-ntconsult-tst&tls=true&authSource=admin");
+
+const ArtigoSchema = new mongoose.Schema({
+    titulo: String,
+    conteudo: String,
+});
+
+const ComentarioSchema = new mongoose.Schema({
+    idArtigo: mongoose.Schema.Types.ObjectId,
+    conteudo: String,
+});
+
+const Artigo = mongoose.model('Artigo', ArtigoSchema);
+const Comentario = mongoose.model('Comentario', ComentarioSchema);
+
+// Configuração do Swagger
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'API de Artigos e Comentários',
+      version: '1.0.0',
+      description: 'Uma API simples para gerenciar artigos e comentários',
+    },
+  },
+  apis: ['./app.js'],
+};
+
+const specs = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 // SERVER
 const port = 3000;
