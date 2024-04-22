@@ -23,7 +23,7 @@ jobs:
           push: true
           tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
           build-args: |
-            DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}       
+            DB_CONNECTION_STRING="mongodb+srv://doadmin:Z2s369170Q8vMYNu@private-mongodb-ntconsult-tst-24287131.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=mongodb-ntconsult-tst"
 
   deploy:
     needs: build
@@ -39,5 +39,5 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/loadbalancer.yaml
+          kubectl delete -f k8s/deployment.yaml
+          kubectl delete -f k8s/loadbalancer.yaml
