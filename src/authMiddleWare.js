@@ -1,16 +1,16 @@
-// authMiddleware.js
-
-const fixedAuthToken = 'TESTETOKENABERTO'; // UUID fixo para autenticação
+const fixedAuthToken = 'dellabeneto';
 
 function authenticate(req, res, next) {
-    const authToken = req.headers['x-auth-token']; // Supondo que o UUID esteja no cabeçalho 'x-auth-token'
-    
-    // Verifica se o token está presente e se é válido
-    if (authToken && authToken === fixedAuthToken) {
-        // Token válido, permite a próxima rota
+    const authToken = req.headers['x-auth-token'];
+
+    if (req.originalUrl.includes('/api-docs')) {
         next();
     } else {
-        return res.status(403).json({ message: 'Token de autenticação inválido' });
+        if (authToken && authToken === fixedAuthToken) {
+            next();
+        } else {
+            return res.status(403).json({ message: 'Token de autenticação inválido' });
+        }
     }
 }
 

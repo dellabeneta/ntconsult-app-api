@@ -5,6 +5,8 @@ const { body, validationResult } = require('express-validator');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
+
+
 const app = express();
 app.use(express.json());
 app.use(authenticate);
@@ -172,10 +174,8 @@ app.delete('/comentarios', authenticate, async (req, res) => {
 
 
 
-
 // DEFINIÇÕES DO BANCO DE DADOS
-// mongoose.connect("mongodb://localhost:27017");
-mongoose.connect("mongodb+srv://doadmin:Z2s369170Q8vMYNu@private-mongodb-ntconsult-tst-24287131.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=mongodb-ntconsult-tst");
+mongoose.connect("mongodb://localhost:27017/apidb");
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,
@@ -190,7 +190,9 @@ const ComentarioSchema = new mongoose.Schema({
 const Artigo = mongoose.model('Artigo', ArtigoSchema);
 const Comentario = mongoose.model('Comentario', ComentarioSchema);
 
-// Configuração do Swagger
+
+
+// DEFINIÇÕES DO SWAGGER
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -208,7 +210,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 
-
-// SERVER
+// DEFINIÇÕES DO SERVIDOR
 const port = 3000;
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
