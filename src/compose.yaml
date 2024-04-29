@@ -1,0 +1,20 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - apint
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - apint
+
+networks:
+  apint:
+    driver: bridge
