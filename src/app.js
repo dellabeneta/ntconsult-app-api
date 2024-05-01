@@ -175,7 +175,7 @@ app.delete('/comentarios', authenticate, async (req, res) => {
 
 
 // DEFINIÇÕES DO BANCO DE DADOS
-mongoose.connect("mongodb://mongo:27017/apidb");
+mongoose.connect(process.env.DB_CONNECTION_STRING);
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,

@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@main
 
+      - name: Set MongoDB Connection String
+        run: echo "DB_CONNECTION_STRING=${{ secrets.DB_CONNECTION_STRING }}" >> $GITHUB_ENV
+
       - name: Login to Digital Ocean Registry
         run: echo "${{ secrets.DO_TOKEN }}" | docker login registry.digitalocean.com -u ${{ secrets.DO_TOKEN }} --password-stdin
 
@@ -21,7 +24,7 @@ jobs:
         with:
           context: ./src
           push: true
-          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v1
+          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v2
           
   deploy:
     needs: build
