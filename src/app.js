@@ -175,7 +175,7 @@ app.delete('/comentarios', authenticate, async (req, res) => {
 
 
 // DEFINIÇÕES DO BANCO DE DADOS
-mongoose.connect(process.env.DB_CONNECTION_STRING);
+mongoose.connect("mongodb+srv://doadmin:pW5o089361Y4gSaM@private-mongodb-ntconsult-tst-dbbc489b.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=mongodb-ntconsult-tst");
 
 const ArtigoSchema = new mongoose.Schema({
     titulo: String,

@@ -10,4 +10,4 @@ COPY *.js .
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "node app.js $DB_CONNECTION_STRING"]
+CMD ["node", "app.js"]

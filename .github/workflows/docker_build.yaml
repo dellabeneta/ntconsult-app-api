@@ -24,7 +24,7 @@ jobs:
         with:
           context: ./src
           push: true
-          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v3
+          tags: registry.digitalocean.com/registry-ntconsult-cr/api:v4
           
   deploy:
     needs: build
