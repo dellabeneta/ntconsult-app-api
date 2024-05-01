@@ -1,7 +1,8 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: api-ssl
+  name: api
+  namespace: api
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
     service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
